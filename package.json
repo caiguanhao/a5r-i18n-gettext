@@ -1,6 +1,6 @@
 {
   "name": "a5r-i18n-gettext",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "gettext for a5r-i18n",
   "main": "index.js",
   "repository": {
