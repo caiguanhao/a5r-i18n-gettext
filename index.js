@@ -83,7 +83,7 @@ function gettext (options) {
         var content = JSON.stringify(dictionary[files[i].lang], undefined, 2);
         var file = FILE.clone();
         file.path = files[i].file;
-        file.contents = new Buffer(content);
+        file.contents = new Buffer(content + '\n');
         this.push(file);
       }
     }
