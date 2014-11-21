@@ -18,7 +18,7 @@
     "url": "https://github.com/caiguanhao/a5r-i18n-gettext/issues"
   },
   "homepage": "https://github.com/caiguanhao/a5r-i18n-gettext",
-  "devDependencies": {
+  "dependencies": {
     "extend": "^2.0.0",
     "htmlparser2": "^3.8.2",
     "through2": "^0.6.3"
