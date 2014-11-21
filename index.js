@@ -33,11 +33,13 @@ function gettext (options) {
         dictionary[options.langs[i]] = dictionary[options.langs[i]] || {};
         var current = dictionary[options.langs[i]];
         for (var j = 0; j < l; j++) {
+          var key = parts[j];
+          key = key.replace(/[\n\s]{1,}/g, ' ');
           if (j === l - 1) {
-            current[parts[j]] = current[parts[j]] || '';
+            current[key] = current[key] || '';
           } else {
-            current[parts[j]] = current[parts[j]] || {};
-            current = current[parts[j]];
+            current[key] = current[key] || {};
+            current = current[key];
           }
         }
       }
