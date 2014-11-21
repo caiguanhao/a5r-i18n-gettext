@@ -46,6 +46,14 @@ function gettext (options) {
     }
   }
 
+  function clean (src) {
+    var content = fs.readFileSync(src).toString();
+    return JSON.parse(content, function (key, value) {
+      if (value === '') return undefined;
+      return value;
+    });
+  }
+
   function read (content, done) {
     var parser = new htmlparser.Parser({
       onopentag: function(name, attribs) {
@@ -80,7 +88,7 @@ function gettext (options) {
       });
       for (var i = 0; i < files.length; i++) {
         try {
-          extend(true, dictionary[files[i].lang], require(files[i].file));
+          extend(true, dictionary[files[i].lang], clean(files[i].file));
         } catch (e) {}
         var content = JSON.stringify(dictionary[files[i].lang], undefined, 2);
         var file = FILE.clone();
