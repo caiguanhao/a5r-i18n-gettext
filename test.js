@@ -19,7 +19,7 @@ describe('gettext of js files', function () {
   describe('when function name is tr', function () {
     var tests = {
       "tr('')": [],
-      "tr(' ')": [],
+      "tr(' ')": [' '],
       "tr()": [],
       "tr('s')": ['s'],
       "tr('s' + 's')": ['ss'],
@@ -63,6 +63,7 @@ describe('gettext of js files', function () {
       "tr('a','b')": ['a'],
       "tr('a,b','c')": ['a,b'],
       "tr('a,b',tr('c'))": ['a,b','c'],
+      "tr(' a, b ')": [' a, b '],
     };
 
     tests[multiline(function () {/*

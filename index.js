@@ -14,7 +14,6 @@ function gettext (options) {
 
   function add (str) {
     if (typeof str !== 'string') return;
-    str = str.trim();
     if (str[0] === '{') {
       var object;
       try {
@@ -62,7 +61,9 @@ function gettext (options) {
   function readHTML (content, done) {
     var parser = new htmlparser.Parser({
       onopentag: function(name, attribs) {
-        add(attribs.i18n);
+        if (attribs.i18n) {
+          add(attribs.i18n.trim());
+        }
       },
       onend: function() {
         if (done) done();

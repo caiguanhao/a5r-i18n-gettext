@@ -117,7 +117,7 @@ function readJS (content, funcname) {
     strings = [];
   }
   strings = strings.map(function (string) {
-    return String(string).trim();
+    return String(string);
   }).filter(function (string) {
     return string.length;
   });
