@@ -60,6 +60,9 @@ describe('gettext of js files', function () {
       "(tr('a'))": ['a'],
       "(tr   ('a'))": ['a'],
       "function (tr) { tr('a') }": ['a'],
+      "tr('a','b')": ['a'],
+      "tr('a,b','c')": ['a,b'],
+      "tr('a,b',tr('c'))": ['a,b','c'],
     };
 
     tests[multiline(function () {/*
@@ -71,6 +74,12 @@ describe('gettext of js files', function () {
       ;tr (('t' + 'e') +
       ('s' + 't'))
     */})] = ['test'];
+
+    tests[multiline(function () {/*
+     tr('between {{min}} to {{max}}', {
+       min: min, max: max
+     })
+    */})] = ['between {{min}} to {{max}}'];
 
     for (var key in tests) {
       it('"' + key + '" should equal to ' + JSON.stringify(tests[key]),

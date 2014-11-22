@@ -82,7 +82,8 @@ function readJS (content, funcname) {
         }
       }
       if (sq == 0 && dq == 0) {
-        if (pa == 0 && cur == ')') {
+        if (pa == 0 && (cur == ')' || cur == ',')) {
+          // finish if we have first argument
           closed = 1;
           break;
         }
