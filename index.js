@@ -4,6 +4,8 @@ var extend = require('extend');
 var through = require('through2');
 var htmlparser = require('htmlparser2');
 
+var readJS = require('./read-js');
+
 function gettext (options) {
   options = options || {};
   options.langs = options.langs || ['en'];
@@ -54,7 +56,7 @@ function gettext (options) {
     });
   }
 
-  function read (content, done) {
+  function readHTML (content, done) {
     var parser = new htmlparser.Parser({
       onopentag: function(name, attribs) {
         add(attribs.i18n);
@@ -67,13 +69,26 @@ function gettext (options) {
     parser.end();
   }
 
+  function read (file, done) {
+    var content = file.contents.toString();
+    if (file.path.slice(-3).toLowerCase() === '.js') {
+      var ret = readJS(content, 'tr');
+      for (var i = 0; i < ret.length; i++) {
+        add(ret[i]);
+      }
+      done();
+    } else {
+      readHTML(content, done);
+    }
+  }
+
   var FILE;
   return through.obj(function (file, enc, cb) {
     if (!FILE) {
       FILE = file.clone();
       delete FILE.contents;
     }
-    read(file.contents.toString(), cb);
+    read(file, cb);
   }, function (cb) {
     if (FILE) {
       if (options.file) {
