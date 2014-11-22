@@ -51,10 +51,11 @@ function readJS (content, funcname) {
         isTR = 0;
       }
     }
-    content = content.substring(end + 1);
     if (isTR == 0) {
+      content = content.substring(start + funcname.length);
       continue;
     }
+    content = content.substring(end + 1);
 
     var pa = 0; // parenthesis
     var sq = 0; // single-quote

@@ -59,6 +59,7 @@ describe('gettext of js files', function () {
       "try('a')": [],
       "(tr('a'))": ['a'],
       "(tr   ('a'))": ['a'],
+      "function (tr) { tr('a') }": ['a'],
     };
 
     tests[multiline(function () {/*
