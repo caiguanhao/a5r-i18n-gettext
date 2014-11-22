@@ -3,6 +3,9 @@
   "version": "1.0.2",
   "description": "gettext for a5r-i18n",
   "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha test.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/caiguanhao/a5r-i18n-gettext.git"
@@ -22,5 +25,9 @@
     "extend": "^2.0.0",
     "htmlparser2": "^3.8.2",
     "through2": "^0.6.3"
+  },
+  "devDependencies": {
+    "chai": "^1.10.0",
+    "mocha": "^2.0.1"
   }
 }
