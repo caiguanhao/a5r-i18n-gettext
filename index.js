@@ -52,6 +52,9 @@ function gettext (options) {
     var content = fs.readFileSync(src).toString();
     return JSON.parse(content, function (key, value) {
       if (value === '') return undefined;
+      if (typeof value === 'object' && Object.keys(value).length === 0) {
+        return undefined;
+      }
       return value;
     });
   }
