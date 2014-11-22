@@ -79,6 +79,7 @@ describe('gettext of js files', function () {
 
   describe('when function name is _____', function () {
     var tests = {
+      " _____ (('a') + ('b' + 'c'))": ['abc'],
       ";_____('a')": ['a'],
       ";_____;('a')": [],
       "s_____('a')": [],
@@ -86,11 +87,31 @@ describe('gettext of js files', function () {
       "._____('a')": [],
       "$_____('a')": [],
       "π_____('a')": [],
+      "_____$('a')": [],
     };
 
     for (var key in tests) {
       it('"' + key + '" should equal to ' + JSON.stringify(tests[key]),
         makeTest(readJS(key, '_____'), tests[key]));
+    }
+  });
+
+  describe('when function name is $scope.i18n.translate', function () {
+    var tests = {
+      " $scope.i18n.translate (('a') + ('b' + 'c'))": ['abc'],
+      ";$scope.i18n.translate('a')": ['a'],
+      ";$scope.i18n.translate;('a')": [],
+      "s$scope.i18n.translate('a')": [],
+      "_$scope.i18n.translate('a')": [],
+      ".$scope.i18n.translate('a')": [],
+      "$$scope.i18n.translate('a')": [],
+      "π$scope.i18n.translate('a')": [],
+      "$scope.i18n.translated('a')": [],
+    };
+
+    for (var key in tests) {
+      it('"' + key + '" should equal to ' + JSON.stringify(tests[key]),
+        makeTest(readJS(key, '$scope.i18n.translate'), tests[key]));
     }
   });
 });

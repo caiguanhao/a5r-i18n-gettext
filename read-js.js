@@ -19,13 +19,37 @@ function readJS (content, funcname) {
         func = prev + func;
       }
     }
-    try {
-      var name = new Function('return function ' + func + ' () {}.name')();
-      if (name != funcname) {
+    if (isTR == 1) {
+      try {
+        if (func.indexOf('.') > -1) {
+          var parts = func.split('.');
+          var parts2 = funcname.split('.');
+          var test = 'var ';
+          var test2 = '';
+          var exp = [];
+          for (var i = 0; i < parts.length; i++) {
+            var part = parts[i].trim();
+            exp.push(part);
+            test2 += JSON.stringify(part) + ' == ' +
+              JSON.stringify(parts2[i].trim()) + ' && ';
+            if (i == parts.length -1) {
+              test += exp.join('.') + ' = function () {}; ';
+            } else {
+              test += exp.join('.') + ' = {}; ';
+            }
+          }
+          test += 'return ' + test2 + 'typeof ' + exp.join('.') +
+            ' == "function"';
+          var isTR = new Function(test)() ? 1 : 0;
+        } else {
+          var name = new Function('return function ' + func + ' () {}.name')();
+          if (name != funcname) {
+            isTR = 0;
+          }
+        }
+      } catch(e) {
         isTR = 0;
       }
-    } catch(e) {
-      isTR = 0;
     }
     content = content.substring(end + 1);
     if (isTR == 0) {
