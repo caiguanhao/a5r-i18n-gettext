@@ -1,6 +1,10 @@
 a5r-i18n-gettext
 ================
 
+[![Circle CI](
+https://circleci.com/gh/caiguanhao/a5r-i18n-gettext.png?style=badge)](
+https://circleci.com/gh/caiguanhao/a5r-i18n-gettext)
+
 gettext for a5r-i18n
 
 ```js
