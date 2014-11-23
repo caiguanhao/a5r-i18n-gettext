@@ -64,6 +64,9 @@ describe('gettext of js files', function () {
       "tr('a,b','c')": ['a,b'],
       "tr('a,b',tr('c'))": ['a,b','c'],
       "tr(' a, b ')": [' a, b '],
+      "tr('a,b',tr(c))": ['a,b'],
+      "tr(tr(a),'a,b',tr(c))": [],
+      "tr(a)tr('a,b',tr(c))": ['a,b'],
     };
 
     tests[multiline(function () {/*

@@ -110,12 +110,13 @@ function readJS (content, funcname) {
   }
 
   if (exprs.length == 0) return [];
-  var strings;
-  try {
-    strings = new Function('return [' + exprs.join(',') + ']')();
-  } catch (e) {
-    strings = [];
-  }
+  var strings = exprs.map(function (expr) {
+    try {
+      return new Function('return ' + expr)() || '';
+    } catch (e) {
+      return '';
+    }
+  });
   strings = strings.map(function (string) {
     return String(string);
   }).filter(function (string) {
