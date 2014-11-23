@@ -9,6 +9,7 @@ var readJS = require('./read-js');
 function gettext (options) {
   options = options || {};
   options.langs = options.langs || ['en'];
+  options.excludeRootKeys = options.excludeRootKeys || [];
 
   var dictionary = {};
 
@@ -107,6 +108,10 @@ function gettext (options) {
       });
       for (var i = 0; i < files.length; i++) {
         try {
+          var keys = options.excludeRootKeys;
+          for (var j = 0; j < keys.length; j++) {
+            delete dictionary[files[i].lang][keys[j]];
+          }
           extend(true, dictionary[files[i].lang], clean(files[i].file));
         } catch (e) {}
         var content = JSON.stringify(dictionary[files[i].lang], undefined, 2);
