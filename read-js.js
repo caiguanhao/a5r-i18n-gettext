@@ -112,7 +112,7 @@ function readJS (content, funcname) {
   if (exprs.length == 0) return [];
   var strings = exprs.map(function (expr) {
     try {
-      return new Function('return ' + expr)() || '';
+      return new Function('return ' + expr.trim())() || '';
     } catch (e) {
       return '';
     }

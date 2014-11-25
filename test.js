@@ -85,6 +85,15 @@ describe('gettext of js files', function () {
      })
     */})] = ['between {{min}} to {{max}}'];
 
+    tests[multiline(function () {/*
+      tr(
+        'Successfully created {{title}}. ' +
+        'You will be redirected.', {
+          title: 'title'
+        }
+      )
+    */})] = ['Successfully created {{title}}. You will be redirected.'];
+
     for (var key in tests) {
       it('"' + key + '" should equal to ' + JSON.stringify(tests[key]),
         makeTest(readJS(key), tests[key]));
